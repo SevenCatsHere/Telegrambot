@@ -4,7 +4,8 @@
   "description": "Bot for telegram fun times",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "telegram-node-bot": "^4.0.5"
   },
   "devDependencies": {},
   "scripts": {
