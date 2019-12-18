@@ -1,0 +1,25 @@
+{
+  "name": "MyBot",
+  "version": "1.0.0",
+  "description": "Bot for telegram fun times",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/insomniac807/Telegrambot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/insomniac807/Telegrambot/issues"
+  },
+  "homepage": "https://github.com/insomniac807/Telegrambot#readme"
+}
