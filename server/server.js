@@ -5,6 +5,12 @@ const bodyParser =  require('body-parser');
 const methodOverride = require('method-override');
 const redis = require('redis');
 
+let client = redis.createClient();
+
+client.on('connect', function() {
+    console.log("Connected to Redis");
+});
+
 const port = 3000;
 const app = express();
 
@@ -20,6 +26,10 @@ app.use(methodOverride('_method'));
 
 app.get('/', function(req, res, next) {
     res.render('searchusers');
+});
+
+app.post('/api/bot/handleKarma', function(req, res, next){
+    let id = this.body.id;
 });
 
 app.listen(port, function(){
