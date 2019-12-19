@@ -17,8 +17,9 @@ class Bot {
         this.launch = this.launch.bind(this);
     }
 
-    launch = () => {
+    launch() {
         this.bot.launch();
+
     }
 }
 

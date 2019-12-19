@@ -8,7 +8,7 @@ class Karma {
         this.giveKarma = this.giveKarma.bind(this);
     }
 
-    giveKarma = () => {
+    giveKarma() {
         console.log("Karma attempt recieved");
         let reply =  this.user+" sends karma to "+this.reciever+" in the "+this.room+" channel!";
         this.context.reply(reply);
