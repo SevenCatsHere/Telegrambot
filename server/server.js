@@ -26,9 +26,9 @@ app.use(methodOverride('_method'));
 
 app.get('/', function(req, res, next) {
     res.render('searchusers');
-    particlesJS.load('particles-js', './views/layouts/particles.json', function(){
-        console.log("particles.json loaded");
-    })
+    // particlesJS.load('particles-js', './views/layouts/particles.json', function(){
+    //     console.log("particles.json loaded");
+    // })
 });
 
 app.post('/api/bot/handleKarma', function(req, res, next){
