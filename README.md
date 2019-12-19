@@ -1,17 +1,8 @@
 # Telegrambot
-Bot for telegram fun times
+Bot for telegram fun times  
 
-# requires
-nodejs  
-express  
-
-$sudo apt-get install nodejs  
-$cd ./myProjectDir    
-$./myProjectDir npm install express    
-$./myProjectDir node server.js    
-
-# look for
-Example app listening on port 3000!  
-# in the console then go to
-localhost:3000  
-# in the browser
+# Edit config.example.js
+Put your telegram bot api key in the config file and change name of file to config.js
+# Run
+node index.js 
+# Your bot is now live
