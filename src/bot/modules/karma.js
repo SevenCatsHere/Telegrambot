@@ -1,6 +1,3 @@
-const Telegraf = require('telegraf')
-
-
 class Karma {
     constructor(context) {
         this.context = context;
