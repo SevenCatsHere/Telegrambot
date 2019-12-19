@@ -10,7 +10,7 @@ class Karma {
 
     giveKarma() {
         console.log("Karma attempt recieved");
-        let reply =  this.user+" sends karma to "+this.reciever+" in the "+this.room+" channel!";
+        let reply =  this.user+" sends karma to "+this.reciever;
         this.context.reply(reply);
     }
 }
