@@ -3,4 +3,4 @@ const config = require('./config.js');
 
 Bot_Instance = new Bot(config);
 
-Bot_Instance.bot.launch()
+Bot_Instance.launch()
