@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const server = "http://localhost:4000";
+const server = "http://139.162.242.97";
 const apiGetKarma = "/api/bot/getUserKarma";
 
 class Karma {
