@@ -62,7 +62,7 @@ async function initUserKarma(req, res) {
 
         client.set(name, 1);
 
-        res.send({name: 1});
+        res.send(JSON.parse('{'+name+': 1}');
 
     } catch (error) {
         console.error(error);

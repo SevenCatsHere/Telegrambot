@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const server = "http://localhost:4000";
+const server = "http://139.162.242.97";
 const apiGetKarma = "/api/bot/getUserKarma";
 
 class Karma {
@@ -14,7 +14,7 @@ class Karma {
 
     async giveKarma() {
         let kReciever = this.message.substring(1, this.message.indexOf('++'));
-        let query = server+apiGetKarma+kReciever;
+        let query = server+apiGetKarma+":"+kReciever;
         try {
             await fetch(query)
                 .then(res => {
