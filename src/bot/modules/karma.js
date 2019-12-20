@@ -18,9 +18,13 @@ class Karma {
         try {
             await fetch(query)
                 .then(res => {
+                    console.log("res: ");
+                    console.log(res);
                     return res.json()
                 })
                 .then(body => {
+                    console.log("body: ");
+                    console.log(body);
                     let karma = body.karma === undefined? 1 : body.karma;
                     this.context.reply(kReciever+" now has "+karma+" karma");
                 });
