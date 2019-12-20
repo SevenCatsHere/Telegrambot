@@ -14,7 +14,7 @@ class Karma {
 
     async giveKarma() {
         let kReciever = this.message.substring(1, this.message.indexOf('++'));
-        let query = server+apiGetKarma+":"+kReciever;
+        let query = server+apiGetKarma+kReciever;
         try {
             await fetch(query)
                 .then(res => {
