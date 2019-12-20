@@ -12,14 +12,21 @@ class Karma {
         this.checkKarma = this.checkKarma.bind(this);
     }
 
-    giveKarma() {
+    async giveKarma() {
         let kReciever = this.message.substring(1, this.message.indexOf('++'));
         let query = server+apiGetKarma+kReciever;
-        fetch(query)
-            .then(res => res.json())
-            .then(body => {
-                this.context.reply(kReciever+" now has "+body.karma+" karma");
-            });
+        try {
+            await fetch(query)
+                .then(res => {
+                    return res.json()
+                })
+                .then(body => {
+                    let karma = body.karma === undefined? 1 : body.karma;
+                    this.context.reply(kReciever+" now has "+karma+" karma");
+                });
+        }catch (error) {
+            console.error(error);
+        }
     }
 
     takeKarma() {

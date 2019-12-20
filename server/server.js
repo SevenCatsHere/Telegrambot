@@ -48,7 +48,7 @@ function cache(req, res, next) {
             console.log("data "+parseInt(data));
             let newKarma = parseInt(data) + 1;
             client.set(name, newKarma);
-            res.json({"karma": newKarma.toString()});
+            res.json(JSON.parse('{"karma": '+newKarma+'}'));
         } else {
             next();
         }
