@@ -65,7 +65,7 @@ async function initUserKarma(req, res) {
         let karma = 1;
         console.log(client.set(name, karma));
 
-        res.json({name: karma});
+        res.json(JSON.parse('{"karma": '+karma+'}'));
 
     } catch (error) {
         console.error(error);
