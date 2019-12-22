@@ -10,7 +10,7 @@ class BotController {
 	}
 
 	launchCommand(message) {
-		if (['++', '-', 'karma'].some(a => message.includes(a))) {
+		if (['++', '-', 'karma'].some((a) => message.includes(a))) {
 			console.log(`botController passes ${this.server} as server to karma.js`);
 			const kC = new KarmaController(this.context, this.server);
 			const cmd = kC.getCommand();
