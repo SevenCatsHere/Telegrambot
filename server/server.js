@@ -8,13 +8,13 @@ const redis = require('redis');
 var client = redis.createClient();
 
 
-// client.on('connect', function() {
-//     console.log("Connected to Redis");
-// });
+client.on('connect', function() {
+    console.log("Connected to Redis");
+});
 
-// client.on('error',function() {
-//  console.log("Error in Redis");
-// })
+client.on('error',function() {
+ console.log("Error in Redis");
+})
 
 const port = 4000;
 const app = express();
@@ -36,34 +36,60 @@ app.get('/', function(req, res, next) {
 
 //BACK END API STUFF ////
 
+function handleKarma(name, data, method) {
+    let newKarma = 0;
+    switch(method) {
+        case "add":
+            newKarma = parseInt(data) + 1;
+            client.set(name, newKarma);
+            break;
+        case "take":
+            newKarma = parseInt(data) - 1;
+            client.set(name, newKarma);
+            break;
+        case "get":
+            newKarma = parseInt(data);
+            break;
+    }
+    return newKarma;
+}
+
 // Cache middleware
 function cache(req, res, next) {
-    const { name } = req.params;
-    console.log("Name sent to server.... "+name);
+    const name  = req.query.name;
+    const method  = req.query.method;
 
     client.get(name, (err, data) => {
         if(err) throw err;
 
         if(data !== null && data !== undefined && data !== "") {
-            console.log("data "+parseInt(data));
-            let newKarma = parseInt(data) + 1;
-            client.set(name, newKarma);
+            let newKarma = handleKarma(name, data, method);
             res.json(JSON.parse('{"karma": '+newKarma+'}'));
         } else {
             next();
         }
-    })
+    });
 }
+
 //next middleware
 async function initUserKarma(req, res) {
     try {
-        console.log("Fetching karma..");
-        const { name } = req.params;
+        const name  = req.query.name;
+        const method  = req.query.method;
 
-        console.log("name..."+name);
+        let karma;
 
-        let karma = 1;
-        console.log(client.set(name, karma));
+        if(method === "add") {
+            karma = 1;
+            client.set(name, karma);
+        }
+        else if(method === "take") {
+            karma = -1;
+            client.set(name, karma);
+        }
+        else if(method === "get") {
+            karma = 0;
+        }
 
         res.json(JSON.parse('{"karma": '+karma+'}'));
 
@@ -75,7 +101,7 @@ async function initUserKarma(req, res) {
 }
 
 
-app.get('/api/bot/getUserKarma:name', cache, initUserKarma);
+app.get('/api/bot/addKarma', cache, initUserKarma);
 
 app.listen(port, function(){
     console.log(`Server stared on port `+port+"!")

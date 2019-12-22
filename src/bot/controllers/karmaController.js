@@ -1,21 +1,21 @@
 const Karma = require('../modules/karma.js');
 
 class KarmaController {
-    constructor(context) {
+    constructor(context, server) {
         this.context = context;
-        this.karma = new Karma(context);
+        this.karma = new Karma(context, server);
     }
 
     getCommand() {
         let message = this.context.message.text;
+        console.log("MESSAGE: "+message);
         if(message.includes("++")){
             return 1;
         }
         else if(message.includes("—")) {
-            console.log("minus");
             return -1;
         }
-        else if(message.includes("karma")) {
+        else if(message.includes("/karma")) {
             return 0;
         }
         return null;

@@ -1,47 +1,52 @@
 const fetch = require('node-fetch');
-const server = "http://139.162.242.97";
-const apiGetKarma = "/api/bot/getUserKarma";
+const apiGetKarma = "/api/bot/addKarma";
 
 class Karma {
-    constructor(context) {
+    constructor(context, server) {
         this.context = context;
+        this.server = server;
         this.user = context.message.from.username;
         this.message = context.message.text;
-        this.giveKarma = this.giveKarma.bind(this);
-        this.takeKarma = this.takeKarma.bind(this);
-        this.checkKarma = this.checkKarma.bind(this);
     }
 
-    async giveKarma() {
-        let kReciever = this.message.substring(1, this.message.indexOf('++'));
-        let query = server+apiGetKarma+kReciever;
+    async handleKarmaCall(method) {
+        let karmaPerson, query;
+        switch(method) {
+            case "add":
+            case "take":
+                let mSubstring = method === "add" ? '++' : '—';
+                karmaPerson = this.message.substring(1, this.message.indexOf(mSubstring));
+                break;
+            case "get":
+                karmaPerson = this.message.replace("/karma", "").trim();
+                break;
+        }
+        query = this.server+apiGetKarma+"/?name="+karmaPerson+"&method="+method;
         try {
             await fetch(query)
                 .then(res => {
-                    console.log("res: ");
-                    console.log(res);
                     return res.json()
                 })
                 .then(body => {
-                    console.log("body: ");
-                    console.log(body);
                     let karma = body.karma === undefined? 1 : body.karma;
-                    this.context.reply(kReciever+" now has "+karma+" karma");
+                    let replyBody = method === "get" ? " has " : " now has ";
+                    this.context.reply(karmaPerson + replyBody + karma + " karma");
                 });
         }catch (error) {
             console.error(error);
         }
     }
 
-    takeKarma() {
-        let reciever = this.message.substring(1, this.message.indexOf('—'));
-        let reply =  this.user+" takes karma from "+reciever;
-        this.context.reply(reply);
+    async giveKarma() {
+        this.handleKarmaCall("add");
+    }
+
+    async takeKarma() {
+        this.handleKarmaCall("take");
     }
 
     checkKarma() {
-        let reply =  this.user+" is fishing for karma!";
-        this.context.reply(reply);
+        this.handleKarmaCall("get");
     }
 }
 

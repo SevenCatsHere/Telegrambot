@@ -6,9 +6,9 @@ class Bot {
     constructor(config) {
         this.bot = new Telegraf(config.BotApiKey);
 
-        this.bot.on('text', (ctx) => {
-            let message = ctx.message.text;
-            let bC = new BotController(ctx);
+        this.bot.on('text', (context) => {
+            let message = context.message.text;
+            let bC = new BotController(context, config.Server);
             bC.launchCommand(message);
         });
 
