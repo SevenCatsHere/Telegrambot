@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Bot for telegram fun times",
   "main": "server.js",
-  "dependencies": {
-    "request": "^2.88.0",
-    "telegraf": "^3.34.1"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd ./server/ && node server.js"
@@ -21,5 +17,15 @@
   "bugs": {
     "url": "https://github.com/insomniac807/Telegrambot/issues"
   },
-  "homepage": "https://github.com/insomniac807/Telegrambot#readme"
+  "homepage": "https://github.com/insomniac807/Telegrambot#readme",
+  "dependencies": {
+    "request": "^2.88.0",
+    "telegraf": "^3.34.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.19.1",
+    "nodemon": "^2.0.2"
+  }
 }
