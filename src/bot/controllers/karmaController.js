@@ -1,42 +1,26 @@
+'use strict';
+
 const Karma = require('../modules/karma.js');
 
 class KarmaController {
-    constructor(context, server) {
-        this.context = context;
-        this.karma = new Karma(context, server);
-    }
+	constructor(context, server) {
+		this.context = context;
+		this.karma = new Karma(context, server);
+	}
 
-    getCommand() {
-        let message = this.context.message.text;
-        console.log("MESSAGE: "+message);
-        if(message.includes("++")){
-            return 1;
-        }
-        else if(message.includes("—")) {
-            return -1;
-        }
-        else if(message.includes("/karma")) {
-            return 0;
-        }
-        return null;
-    }
+	getCommand() {
+		const message = this.context.message.text;
+		if (message.includes('++')) return 1;
+		if (message.includes('—')) return -1;
+		if (message.includes('/karma')) return 0;
+		return null;
+	}
 
-    runCommand(command) {
-        switch(command) {
-            case 1: {
-                this.karma.giveKarma();
-                break;
-            }
-            case -1: {
-                this.karma.takeKarma();
-                break;
-            }
-            case 0: {
-                this.karma.checkKarma();
-                break;
-            }
-        }
-    }
+	runCommand(command) {
+		if (command === 1) this.karma.giveKarma();
+		else if (command === -1) this.karma.takeKarma();
+		else this.karma.checkKarma();
+	}
 }
 
 module.exports = KarmaController;
